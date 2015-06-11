@@ -23,7 +23,7 @@ public class DenPanel extends JPanel implements Runnable {
 	/** THE MAIN THREAD. **/
 	private Thread t;
 	
-	/** TIME MANAGEMENT **/
+	/** OPTIMIZATION MANAGEMENT **/
 	private final int FPS = 24;
 	private double avgFPS;
 	
@@ -40,8 +40,8 @@ public class DenPanel extends JPanel implements Runnable {
 	}
 	
 	public void init() {
-		setMinimumSize(new Dimension(DenConstants.WIDTH, DenConstants.HEIGHT));
-		setPreferredSize(new Dimension(DenConstants.WIDTH, DenConstants.HEIGHT));
+		setMinimumSize(DenConstants.DIM);
+		setPreferredSize(DenConstants.DIM);
 		
 		initGame();
 		
@@ -145,11 +145,11 @@ public class DenPanel extends JPanel implements Runnable {
 		// Update state.
 		//DenSceneManager.update();
 		
-		// Update map.
-		map.update();
-		
 		// Update input.
 		DenInput.update();
+		
+		// Update map.
+		map.update();
 		
 		// Update player.
 		den.update();
@@ -193,7 +193,7 @@ public class DenPanel extends JPanel implements Runnable {
 		// Convert Graphics object to Graphics2D.
 		g = convertTo2D(g);
 		
-		// Draw current state.
+		/** Draw current state. **/
 		//DenSceneManager.draw(g);
 		
 		// Draw map
@@ -204,9 +204,6 @@ public class DenPanel extends JPanel implements Runnable {
 		
 		// Draw HUD.
 		hud.draw(g);
-		
-		/** Draw the current game state. **/
-		//dsm.draw(g);
 		
 		// If debug, draw average FPS.
 		if (debug) { 
