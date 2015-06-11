@@ -10,6 +10,8 @@ public class DenConstants {
 	public static final int HEIGHT = 480;
 	public static final int SCALE = 1;
 	
+	public static final Dimension DIM = new Dimension(WIDTH, HEIGHT);
+	
 	public static final int ARRAYNUM = 840;
 	public static final int TILESIZE = 24;//32;
 	
@@ -25,13 +27,13 @@ public class DenConstants {
 	private static String spritepath = path + "sprites/";
 	private static String imagepath = path + "images/";
 	
-	public static final String AG = tilepath + "AboveGround.png";
+	public static final String G = tilepath + "AboveGround.png";
 	public static final String GRD = tilepath + "Ground.png";
 	public static final String SK = tilepath + "Sky.png";
 	
 	public static final Image BLANK = ImageLoader.loadBufferedImage(tilepath + "Blank.png"), 
 								SKY = ImageLoader.loadBufferedImage(SK),
-								ABOVEGROUND = ImageLoader.loadBufferedImage(AG),
+								GRASS = ImageLoader.loadBufferedImage(G),
 								GROUND = ImageLoader.loadBufferedImage(GRD);
 								
 	//public static final Image TITLEBG = ImageLoader.loadBufferedImage(imagepath + "");
