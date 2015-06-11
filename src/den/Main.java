@@ -2,7 +2,7 @@
 /* THE EPIC OF DEN.
 /* ------------------------------------
 /* code by Nico Poblete
-/* Copyright 2014 OM Independent
+/* Copyright (c) 2014 OM Independent
 /**====================================**/
 package den;
 
@@ -20,7 +20,8 @@ public class Main {
 				try {
 					frame();
 				} catch (Exception e) {
-					System.err.println("ERROR: Unable to run Epic of Den.");
+					System.err.println("ERROR: Unable to run Epic of Den.\nCAUSE: " 
+							+ e.getClass() + " " + e.getMessage());
 					e.printStackTrace();
 					System.exit(1);
 				}
