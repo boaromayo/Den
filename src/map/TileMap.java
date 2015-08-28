@@ -18,8 +18,8 @@ public class TileMap {
 	private String name;
 	
 	// MAP CHARACTER INDEX, TILES IN MAP, TILE INDEX
-	private char [][] map;
-	//private int [][] map;
+	//private char [][] map;
+	private int [][] map;
 	private Tile [][] tiles;
 	private BufferedImage[][] tileset;
 	
@@ -172,9 +172,9 @@ public class TileMap {
 			}
 			
 			// Line index array as a temp to keep characters in
-			char [][] lineIndex = new char[mapRows][];
+			//char [][] lineIndex = new char[mapRows][];
 			
-			/*int [][] lineIndex = new int[mapRows][];*/
+			int [][] lineIndex = new int[mapRows][];
 			
 			// Open stream again to reset reader.
 			br = new BufferedReader(new FileReader(fileName));
@@ -209,13 +209,13 @@ public class TileMap {
 			}
 			
 			// Set map and tiles to fixed height and width.
-			// Assign tiles based on map chars.
-			map = new char[mapRows][mapCols];
+			// Assign tiles based on tile id.
+			map = new int[mapRows][mapCols];
 			tiles = new Tile[mapRows][mapCols];
 			
 			for (int row = 0; row < mapRows; row++) {
 				for (int col = 0; col < mapCols; col++) {
-					map[row][col] = lineIndex[row][col]; // Character array should have index.
+					map[row][col] = lineIndex[row][col]; // Int array should have index.
 					tiles[row][col] = loadTile(map[row][col]); // Tiles based on map char array.
 				}
 			}
@@ -259,7 +259,7 @@ public class TileMap {
 	
 	private Tile loadTile(char index) {
 		try {
-			if (index == 'A') {
+			/*if (index == 'A') {
 				return new Tile(DenConstants.GRASS, Tile.YES);
 			} else if (index == 'G') {
 				return new Tile(DenConstants.GROUND, Tile.YES);
@@ -267,7 +267,7 @@ public class TileMap {
 				return new Tile(DenConstants.SKY, Tile.NO);
 			} else {
 				return new Tile(DenConstants.BLANK, Tile.NO);
-			}
+			}*/
 		} catch (Exception e) {
 			System.err.println("ERROR: Unable to load tiles onto map.");
 			e.printStackTrace();
@@ -380,13 +380,17 @@ public class TileMap {
 	
 	public String getName() { return name; }
 	
-	public char getIndex(int row, int col) { return map[row][col]; }
+	//public char getIndex(int row, int col) { return map[row][col]; }
 	
-	//public int getIndex(int row, int col) { return map[row][col]; }
+	public int getIndex(int row, int col) { return map[row][col]; }
 	
 	public boolean isSolid(int row, int col) { return tiles[row][col].isSolid(); }
 	
 	public boolean isTransparent(int row, int col) { return tiles[row][col].isTransparent(); }
+	
+	public boolean isCtrTile(int row, int col) { return tiles[row][col].isCtrTile(); }
+	
+	public boolean isDangerous(int row, int col) { return tiles[row][col].isDangerous(); }
 	
 	public boolean isTopDown() { return topDown; }
 	
