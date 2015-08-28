@@ -4,12 +4,15 @@ import java.awt.*;
 import java.awt.image.*;
 
 public class Tile {
-
 	/**============================
 	/* VARIABLES.
 	/*=============================**/
+	// TILE ID, TYPE.
+	private int id;
+	private String type;
+	
 	// TILE IMAGE.
-	private Image img;
+	private BufferedImage img;
 	
 	// COLLISION
 	private boolean solid;
@@ -17,34 +20,63 @@ public class Tile {
 	// TRANSPARENT
 	private boolean transparent;
 	
-	// COLLISION TYPES.
-	public static final boolean NO = false;
-	public static final boolean YES = true;
+	// COUNTER
+	private boolean counter;
 	
+	// DANGEROUS
+	private boolean dangerous;
 	/**=============================
-	/* CONSTRUCTOR(int).
+	/* CONSTRUCTOR().
 	/*==============================**/
-	public Tile(int i) {
-		//init(i);
+	public Tile() {
+		id = 0;
+		type = "";
+		img = null;
+		solid = false;
+		transparent = false;
+		counter = false;
+		dangerous = false;
 	}
 	
 	/**=============================
-	/* CONSTRUCTOR(image,solid).
+	/* CONSTRUCTOR(id,type,bufferedImage).
 	/*==============================**/
-	public Tile(Image i, boolean s) {
-		img = i;
+	public Tile(int id, String type, BufferedImage img) {
+		this.id = id;
+		this.type = type;
+		this.img = img;
+		solid = false;
+		transparent = false;
+		counter = false;
+		dangerous = false;
+	}
+	
+	/**=============================
+	/* CONSTRUCTOR(id,type,bufferedImage,solid).
+	/*==============================**/
+	public Tile(int id, String type, BufferedImage img, boolean s) {
+		this(id,type,img);
 		solid = s;
+		transparent = false;
+		counter = false;
+		dangerous = false;
 	}
 	
 	/**=============================
-	/* CONSTRUCTOR(bufferedImage,solid).
+	/* CONSTRUCTOR(id,type,bufferedImage,solid,transparent).
 	/*==============================**/
-	public Tile(BufferedImage i, boolean s) {
-		img = i;
-		solid = s;
+	public Tile(int id, String type, BufferedImage img, boolean s, boolean t) {
+		this(id,type,img,s);
+		transparent = t;
+		counter = false;
+		dangerous = false;
 	}
 	
-	public void setImage(Image i) {
+	public void setId(int i) { id = i; }
+	
+	public void setType(String t) {	type = t; }
+	
+	public void setImage(BufferedImage i) {
 		try {
 			img = i;
 		} catch (Exception e) {
@@ -59,9 +91,21 @@ public class Tile {
 	
 	public void setTransparent(boolean t) { transparent = t; }
 	
-	public Image getImage() { return img; }
+	public void setCounter(boolean ctr) { counter = ctr; }
+	
+	public void setDangerous(boolean d) { dangerous = d; }
+	
+	public int getId() { return id; }
+	
+	public String getType() { return type; }
+	
+	public BufferedImage getImage() { return img; }
 	
 	public boolean isSolid() { return solid; }
 	
 	public boolean isTransparent() { return transparent; }
+
+	public boolean isCtrTile() { return counter; }
+	
+	public boolean isDangerous() { return dangerous; }
 }
