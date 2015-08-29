@@ -19,7 +19,8 @@ public abstract class Entity {
 	protected TileMap map;
 	
 	/** POSITION AND VELOCITY **/
-	protected double x, y, dx, dy;
+	protected double x, y; 
+	protected double dx, dy;
 	protected int tilex, tiley;
 	
 	/** SIZE **/
@@ -141,15 +142,15 @@ public abstract class Entity {
 	 * setTileLocation(x,y)
 	/*=============================**/
 	public void setTileLocation(int x, int y) {
-		int tx = tilex * map.tileSize();
-		int ty = tiley * map.tileSize();
-		setLocation(tx,ty);
+		int lx = x * map.tileSize();
+		int ly = y * map.tileSize();
+		setLocation(lx,ly);
 	}
 	
 	/**============================
-	/* setDelta(dx,dy)
+	/* setVelocity(dx,dy)
 	/*=============================**/
-	public void setDelta(double dx, double dy) { 
+	public void setVelocity(double dx, double dy) { 
 		this.dx = dx; 
 		this.dy = dy; 
 	}
@@ -157,13 +158,13 @@ public abstract class Entity {
 	/**========================
 	/* GET METHODS.
 	/*======================**/
-	public int getx() { return (int)x; }
+	public double getx() { return x; }
 	
-	public int gety() { return (int)y; }
+	public double gety() { return y; }
 	
-	public int getdx() { return (int)dx; }
+	public double getdx() { return dx; }
 	
-	public int getdy() { return (int)dy; }
+	public double getdy() { return dy; }
 	
 	public int getWidth() { return width; }
 	
