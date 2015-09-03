@@ -29,12 +29,11 @@ public class DenConstants {
 	
 	public static final String G = tilepath + "AboveGround.png";
 	public static final String GRD = tilepath + "Ground.png";
-	public static final String SK = tilepath + "Sky.png";
+	//public static final String SK = tilepath + "Sky.png";
 	
-	public static final BufferedImage BLANK = ImageLoader.loadBufferedImage(tilepath + "Blank.png"), 
-								SKY = ImageLoader.loadBufferedImage(SK),
-								GRASS = ImageLoader.loadBufferedImage(G),
-								GROUND = ImageLoader.loadBufferedImage(GRD);
+	public static final BufferedImage BLANK = ImageLoader.loadBufferedImage(tilepath + "Blank.png"); 
+	public static final BufferedImage GRASS = ImageLoader.loadBufferedImage(G);
+	public static final BufferedImage GROUND = ImageLoader.loadBufferedImage(GRD);
 								
 	//public static final Image TITLEBG = ImageLoader.loadBufferedImage(imagepath + "");
 	//public static final Image TITLELABEL = ImageLoader.loadBufferedImage(imagepath + "");
