@@ -258,30 +258,21 @@ public class TileMap {
 		return null;
 	}
 	
-	/*private void loadTileset(String fileName) {
+	private Tile loadTileset(String fileName) {
 		try {
+			/*Tile tile = null;
 			tileset = ImageLoader.loadSheet(fileName, 
 					DenConstants.TILESIZE, DenConstants.TILESIZE);
+			
+			
+			return tile;*/
 		} catch (Exception e) {
 			System.err.println("ERROR: Unable to load tileset onto game.");
 			e.printStackTrace();
 			System.exit(1);
 		}
-	}*/
-	
-	/*private Tile loadTile(int index) {
-		Tile tile = null;
-		
-		try {
-			tile = new Tile(index);
-		} catch (Exception e) {
-			System.err.println("ERROR: Unable to load tiles onto map.");
-			e.printStackTrace();
-			System.exit(1); // ERROR!
-		}
-		
-		return tile;
-	}*/
+		return null;
+	}
 	
 	public void update() {
 		// Move map when player is out of viewing bounds.
