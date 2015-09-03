@@ -238,9 +238,9 @@ public class TileMap {
 		return rows;
 	}
 	
-	private Tile loadTile(String fileName, int index) {
+	/*private Tile loadTile(int index, String fileName) {
 		try {
-			return new Tile(fileName, index);
+			return new Tile(index, fileName, Tile.YES);
 			/*if (index == 'A') {
 				return new Tile(DenConstants.GRASS, Tile.YES);
 			} else if (index == 'G') {
@@ -249,14 +249,14 @@ public class TileMap {
 				return new Tile(DenConstants.SKY, Tile.NO);
 			} else {
 				return new Tile(DenConstants.BLANK, Tile.NO);
-			}*/
+			}
 		} catch (Exception e) {
 			System.err.println("ERROR: Unable to load tiles onto map.");
 			e.printStackTrace();
 			System.exit(1);
 		}
 		return null;
-	}
+	}*/
 	
 	private Tile loadTileset(String fileName) {
 		try {
