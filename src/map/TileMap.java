@@ -12,7 +12,11 @@ import data.ImageLoader;
 
 public class TileMap {
 	// COORDINATES
-	private double x, y, dx, dy;
+	private double x, y;
+	private double xmin, ymin;
+	private double xmax, ymax;
+	private double nx, ny;
+	private double dx, dy;
 	
 	// MAP TITLE
 	private String name;
@@ -51,33 +55,10 @@ public class TileMap {
 		
 		dx = dy = 4;
 		
-		topDown = false;
+		topDown = true;
 		scrollable = false;
 		
 		name = "Sample";
-		
-		upload(fileName); // Upload the tiles
-	}
-	
-	/**=================================================
-	 * CONSTRUCTOR(filename,istop) - For loading text-based map files.
-	 *=================================================*/
-	public TileMap(String fileName, boolean isTop) {
-		tileSize = DenConstants.TILESIZE;
-		
-		mapCols = mapRows = 0;
-		mapWidth = mapCols * tileSize;
-		mapHeight = mapRows * tileSize;
-		
-		rowLimit = DenConstants.HEIGHT / tileSize + 1; // Limit of rows and cols drawn on-screen.
-		colLimit = DenConstants.WIDTH / tileSize + 1;
-		
-		dx = dy = 4;
-		
-		topDown = isTop;
-		scrollable = false;
-		
-		name = " ";
 		
 		upload(fileName); // Upload the tiles
 	}
@@ -98,7 +79,7 @@ public class TileMap {
 		
 		dx = dy = 4;
 		
-		topDown = false;
+		topDown = true;
 		scrollable = false;
 		
 		name = " ";
@@ -302,18 +283,12 @@ public class TileMap {
 	}*/
 	
 	public void update() {
-		if (isScrollable()) {
-			// Move map when player moves.
-			if (isMoving()) {
-				
-			}
-		} else {
-			// Move map when player is out of viewing bounds.
+		// Move map when player is out of viewing bounds.
+		if (isMoving()) {
 			setBounds();
 			
-			// Update the tilemap.
-			if (isMoving()) {
-				
+			if (x != nx || y != ny) {
+				setMoving(true);
 			}
 		}
 	}
@@ -353,7 +328,30 @@ public class TileMap {
 	public void sety(double y) { this.y = y; }
 	
 	public void setBounds() {
-		
+		if (x > nx) {
+			x -= dx;
+			if (x < nx) {
+				x = nx;
+			}
+		}
+		if (x < nx) {
+			x += dx;
+			if (x > nx) {
+				x = nx;
+			}
+		}
+		if (y > ny) {
+			y -= dy;
+			if (y < ny) {
+				y = ny;
+			}
+		}
+		if (y < ny) {
+			y += dy;
+			if (y > ny) {
+				y = ny;
+			}
+		}
 	}
 	
 	public void setName(String n) { name = n; }
