@@ -238,8 +238,9 @@ public class TileMap {
 		return rows;
 	}
 	
-	private Tile loadTile(char index) {
+	private Tile loadTile(String fileName, int index) {
 		try {
+			return new Tile(fileName, index);
 			/*if (index == 'A') {
 				return new Tile(DenConstants.GRASS, Tile.YES);
 			} else if (index == 'G') {
