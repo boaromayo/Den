@@ -12,27 +12,27 @@ import entity.*;
 
 public class DenPanel extends JPanel implements Runnable {
 	/** THE MAP. **/
-	private TileMap map;
+	private TileMap _map;
 	
 	/** THE PLAYER. **/
-	private Den den;
+	private Den _den;
 	
 	/** THE DISPLAY. **/
-	private HUD hud;
+	private HUD _hud;
 	
 	/** THE MAIN THREAD. **/
-	private Thread t;
+	private Thread _t;
 	
 	/** OPTIMIZATION MANAGEMENT **/
-	private final int FPS = 24;
-	private double avgFPS;
+	private final int _FPS = 60;
+	private double _avgFPS;
 	
 	private static final long serialVersionUID = 1L;
 	
 	/** GAME LOOP VARIABLE. **/
-	private boolean gameRunning;
+	private boolean _gameRunning;
 	
-	public static boolean debug;
+	public static boolean _debug;
 	
 	public DenPanel() {
 		super();
@@ -77,20 +77,20 @@ public class DenPanel extends JPanel implements Runnable {
 	}
 	
 	private void initGame() {
-		gameRunning = true; // Start game loop.
-		debug = true;
+		_gameRunning = true; // Start game loop.
+		_debug = true;
 		
 		//DenSceneManager.init();
-		map = new TileMap("../Den/maps/sample.txt");
-		den = new Den(map, 60, 240);
-		hud = new HUD(den);
+		_map = new TileMap("../Den/maps/sample.txt");
+		_den = new Den(map, 60, 240);
+		_hud = new HUD(den);
 	}
 	
 	public void addNotify() {
 		super.addNotify();
-		if (t == null) {
-			t = new Thread(this);
-			t.start();
+		if (_t == null) {
+			_t = new Thread(this);
+			_t.start();
 		}
 	}
 	
@@ -99,16 +99,16 @@ public class DenPanel extends JPanel implements Runnable {
 		long startTime;
 		long diffTime;
 
-		long targetTime = 1000 / FPS;
+		long targetTime = 1000 / _FPS;
 		
 		long waitTime;
-		long playTime = 0;
+		long elapsedTime = 0;
 		
 		int frameCount = 0;
-		int maxFrameCount = FPS;
+		int maxFrameCount = _FPS;
 		
 		try {
-			while(gameRunning) {
+			while(_gameRunning) {
 				startTime = System.nanoTime();
 				
 				update();
@@ -121,14 +121,14 @@ public class DenPanel extends JPanel implements Runnable {
 				
 				Thread.sleep(waitTime);
 				
-				playTime += System.nanoTime() - startTime;
+				elapsedTime += System.nanoTime() - startTime;
 				
 				frameCount++;
 				
 				if (frameCount == maxFrameCount) {
-					avgFPS = 1000.0 / ((playTime / frameCount) / 1000000);
+					_avgFPS = 1000.0 / ((elapsedTime / frameCount) / 1000000);
 					frameCount = 0;
-					playTime = 0;
+					elapsedTime = 0;
 				}
 			}
 		} catch (Exception mainerr) {
@@ -149,21 +149,21 @@ public class DenPanel extends JPanel implements Runnable {
 		DenInput.update();
 		
 		// Update map.
-		map.update();
+		_map.update();
 		
 		// Update player.
-		den.update();
+		_den.update();
 		
 		// Update heads-up display.
-		hud.update();
+		_hud.update();
 	}
 	
 	private void printDebug() {
-		System.out.println(map.getName());
+		System.out.println(_map.getName());
 		
-		for (int row = 0; row < map.rows(); row++) {
-			for (int col = 0; col < map.cols(); col++) {
-				System.out.print(map.getIndex(row,col) + " ");
+		for (int row = 0; row < _map.rows(); row++) {
+			for (int col = 0; col < _map.cols(); col++) {
+				System.out.print(_map.getIndex(row,col) + " ");
 			}
 			System.out.println();
 		}
@@ -197,16 +197,16 @@ public class DenPanel extends JPanel implements Runnable {
 		//DenSceneManager.draw(g);
 		
 		// Draw map
-		map.draw(g);
+		_map.draw(g);
 		
 		// Draw player.
-		den.draw(g);
+		_den.draw(g);
 		
 		// Draw HUD.
-		hud.draw(g);
+		_hud.draw(g);
 		
 		// If debug, draw average FPS.
-		if (debug) { 
+		if (_debug) { 
 			drawFPS(g);
 		}
 		
@@ -215,7 +215,7 @@ public class DenPanel extends JPanel implements Runnable {
 	private void drawFPS(Graphics2D g) {
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Arial", Font.PLAIN, 12));
-		g.drawString("Avg FPS: " + avgFPS, 20, 12); 
+		g.drawString("Avg FPS: " + _avgFPS, 20, 12); 
 	}
 	
 	private Graphics2D convertTo2D(Graphics g) {
