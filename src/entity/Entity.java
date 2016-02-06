@@ -12,8 +12,8 @@ public abstract class Entity {
 	/**==================================
 	 * CONSTANTS.
 	/**==================================*/
-	/** DIRECTIONAL CONSTANTS.**/
-	public static final int UP = 1, LEFT = 2, RIGHT = 3, DOWN = 4;
+	/** DIRECTIONAL ENUM CONSTANTS.**/
+	public static final enum Direction { UP = 0, LEFT = 1, RIGHT = 2, DOWN = 3; }
 	
 	/** TILEMAP. **/
 	protected TileMap map;
