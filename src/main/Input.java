@@ -2,7 +2,7 @@ package den;
 
 import java.awt.event.*;
 
-public class DenInput {
+public class Input {
 
 	/**===========================
 	/* INPUT KEY CONSTANTS.
