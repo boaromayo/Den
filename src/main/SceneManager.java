@@ -4,7 +4,7 @@ import scene.*;
 
 import java.awt.*;
 
-public class DenSceneManager {
+public class SceneManager {
 	/** CURRENT IN-GAME SCENE. **/
 	private static Scene currentScene;
 	
