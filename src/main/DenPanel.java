@@ -52,10 +52,10 @@ public class DenPanel extends JPanel implements Runnable {
 			@Override
 			public void keyPressed(KeyEvent kp) {
 				int key = kp.getKeyCode();
-				DenInput.setKey(key, true);
+				Input.setKey(key, true);
 				den.updateInput();
 				
-				if (DenInput.keyDown(DenInput.ESCAPE)) {
+				if (Input.keyDown(Input.ESCAPE)) {
 					if (DenPanel.debug) { System.exit(0); }
 				}
 			}
@@ -63,7 +63,7 @@ public class DenPanel extends JPanel implements Runnable {
 			@Override
 			public void keyReleased(KeyEvent kr) {
 				int key = kr.getKeyCode();
-				DenInput.setKey(key, false);
+				Input.setKey(key, false);
 				den.updateInput();
 			}
 			@Override
@@ -146,7 +146,7 @@ public class DenPanel extends JPanel implements Runnable {
 		//DenSceneManager.update();
 		
 		// Update input.
-		DenInput.update();
+		Input.update();
 		
 		// Update map.
 		_map.update();
