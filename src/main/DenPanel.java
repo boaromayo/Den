@@ -80,7 +80,7 @@ public class DenPanel extends JPanel implements Runnable {
 		_gameRunning = true; // Start game loop.
 		_debug = true;
 		
-		//DenSceneManager.init();
+		//SceneManager.init();
 		_map = new TileMap("../Den/maps/sample.txt");
 		_den = new Den(map, 60, 240);
 		_hud = new HUD(den);
@@ -143,7 +143,7 @@ public class DenPanel extends JPanel implements Runnable {
 	/**====================*/
 	public void update() {
 		// Update state.
-		//DenSceneManager.update();
+		//SceneManager.update();
 		
 		// Update input.
 		Input.update();
@@ -194,7 +194,7 @@ public class DenPanel extends JPanel implements Runnable {
 		g = convertTo2D(g);
 		
 		/** Draw current state. **/
-		//DenSceneManager.draw(g);
+		//SceneManager.draw(g);
 		
 		// Draw map
 		_map.draw(g);
