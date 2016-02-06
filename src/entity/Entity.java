@@ -13,7 +13,7 @@ public abstract class Entity {
 	 * CONSTANTS.
 	/**==================================*/
 	/** DIRECTIONAL ENUM CONSTANTS.**/
-	public static final enum Direction { UP = 0, LEFT = 1, RIGHT = 2, DOWN = 3; }
+	public enum Direction { UP = 0, LEFT = 1, RIGHT = 2, DOWN = 3; }
 	
 	/** TILEMAP. **/
 	protected TileMap map;
