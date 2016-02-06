@@ -40,8 +40,8 @@ public class DenPanel extends JPanel implements Runnable {
 	}
 	
 	public void init() {
-		setMinimumSize(DenConstants.DIM);
-		setPreferredSize(DenConstants.DIM);
+		setMinimumSize(Constants.DIM);
+		setPreferredSize(Constants.DIM);
 		
 		initGame();
 		
@@ -174,11 +174,11 @@ public class DenPanel extends JPanel implements Runnable {
 	/*=================================**/
 	@Override
 	public void paint(Graphics g) {
-		Image dbi = this.createImage(DenConstants.WIDTH, DenConstants.HEIGHT);
+		Image dbi = this.createImage(Constants.WIDTH, Constants.HEIGHT);
 		Graphics2D dbg = (Graphics2D) dbi.getGraphics();
 
 		draw(dbg); // Draw
-		g.drawImage(dbi, 0, 0, DenConstants.WIDTH, DenConstants.HEIGHT, null);
+		g.drawImage(dbi, 0, 0, Constants.WIDTH, Constants.HEIGHT, null);
 		
 		// Sync up and dispose.
 		Toolkit.getDefaultToolkit().sync();
