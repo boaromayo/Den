@@ -35,9 +35,6 @@ public abstract class Entity {
 	/** ACTIONS **/
 	protected boolean moving, jumping, falling, flashing;
 	
-	/** DIRECTION **/
-	protected int direction;
-	
 	/** SPEED **/
 	protected boolean walkSpeed, runSpeed; // Aka min & max move speed
 	protected double fallSpeed, maxFallSpeed;
