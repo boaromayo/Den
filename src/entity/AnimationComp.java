@@ -7,7 +7,7 @@ import java.util.*;
 
 import den.DenConstants;
 
-public class Animation {
+public class AnimationComp {
 	/** ANIMATION VARIABLES **/
 	private BufferedImage [] frames;
 	private int currFrame, maxFrames; // Current frame count and max number of frames.
@@ -17,7 +17,7 @@ public class Animation {
 	/**=========================
 	// CONSTRUCTOR. 
 	//==========================**/
-	public Animation() {
+	public AnimationComp() {
 		countToFrame = 0;
 		currFrame = 0;
 		
@@ -27,7 +27,7 @@ public class Animation {
 	/**=========================
 	// CONSTRUCTOR(frames). 
 	//==========================**/
-	public Animation(BufferedImage [] frames) {
+	public AnimationComp(BufferedImage [] frames) {
 		this.frames = frames;
 		
 		countToFrame = 0;
