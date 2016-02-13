@@ -4,7 +4,7 @@
 /* code by Nico Poblete
 /* Copyright (c) 2014 OM Independent
 /**====================================**/
-package den;
+package main;
 
 import java.awt.*;
 
