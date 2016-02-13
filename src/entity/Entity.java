@@ -19,6 +19,7 @@ public abstract class Entity {
 	protected TileMap map;
 	
 	/** POSITION AND VELOCITY **/
+	protected PhysicsComp physicsComp;
 	protected double x, y; 
 	protected double dx, dy;
 	protected int tilex, tiley;
@@ -52,6 +53,8 @@ public abstract class Entity {
 	//==========================**/
 	public Entity(TileMap m) {
 		map = m;
+		
+		physicsComp = new PhysicsComp();
 		
 		jumpSpeed = 2;
 		maxJumpSpeed = 5;
