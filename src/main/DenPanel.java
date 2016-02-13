@@ -1,4 +1,4 @@
-package den;
+package main;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -53,7 +53,7 @@ public class DenPanel extends JPanel implements Runnable {
 			public void keyPressed(KeyEvent kp) {
 				int key = kp.getKeyCode();
 				Input.setKey(key, true);
-				den.updateInput();
+				_den.updateInput();
 				
 				if (Input.keyDown(Input.ESCAPE)) {
 					if (DenPanel.debug) { System.exit(0); }
@@ -64,7 +64,7 @@ public class DenPanel extends JPanel implements Runnable {
 			public void keyReleased(KeyEvent kr) {
 				int key = kr.getKeyCode();
 				Input.setKey(key, false);
-				den.updateInput();
+				_den.updateInput();
 			}
 			@Override
 			public void keyTyped(KeyEvent kt) {}
@@ -82,8 +82,8 @@ public class DenPanel extends JPanel implements Runnable {
 		
 		//SceneManager.init();
 		_map = new TileMap("../Den/maps/sample.txt");
-		_den = new Den(map, 60, 240);
-		_hud = new HUD(den);
+		_den = new Den(_map, 60, 240);
+		_hud = new HUD(_den);
 	}
 	
 	public void addNotify() {
