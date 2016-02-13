@@ -1,4 +1,4 @@
-package den;
+package main;
 
 /**===============================================
 // HUD
@@ -14,37 +14,37 @@ import entity.*;
 public class HUD {
 	
 	/** THE PLAYER. **/
-	private Den den;
+	private Den _den;
 	
 	/** IMAGES FOR DISPLAY. **/
-	private BufferedImage image;
+	private BufferedImage _image;
 	
 	/** COLOR AND FONT. **/
-	private Color color;
-	private Font fnt;
+	private Color _color;
+	private Font _fnt;
 	
 	/** RATE OF CHANGE TIME COUNTER **/
-	private long rateStart, rateDiff;
-	private int rateDelay;
+	private long _rateStart, _rateDiff;
+	private int _rateDelay;
 
 	public HUD(Den d) {
 		// Set player.
-		den = d;
+		_den = d;
 		
-		color = Color.BLACK;
-		fnt = new Font("Arial", Font.BOLD, 20);
+		_color = Color.BLACK;
+		_fnt = new Font("Arial", Font.BOLD, 20);
 		
-		rateDelay = 200;
+		_rateDelay = 200;
 	}
 	
 	public void update() {
-		rateStart = System.nanoTime();
+		_rateStart = System.nanoTime();
 	}
 	
 	public void draw(Graphics g) {
 		// Draw heads-up display.
-		g.setColor(color);
-		g.setFont(fnt);
+		g.setColor(_color);
+		g.setFont(_fnt);
 		
 		/** Draw HUD components. **/
 		
@@ -72,7 +72,7 @@ public class HUD {
 	
 	private void drawHP(Graphics g) {
 		// Change color
-		g.setColor(color);
+		g.setColor(_color);
 		
 		// Draw text
 		g.drawString("HP", 60, 30);
@@ -82,7 +82,7 @@ public class HUD {
 		int hpWidth = 5; // Width of one square.
 		int hpHeight = 12; // Height of one square
 		
-		double hpPercent = den.getHPRate();
+		double hpPercent = _den.getHPRate();
 		
 		// Get number of filled squares based on current health.
 		int currentHP = (int) (hpPercent * maxHPCtr);
@@ -103,13 +103,13 @@ public class HUD {
 		}
 		
 		// Draw current and max health
-		g.setColor(color);
+		g.setColor(_color);
 		
 	}
 	
 	private void drawMP(Graphics g) {
 		// Change color
-		g.setColor(color);
+		g.setColor(_color);
 		
 		// Draw text
 		g.drawString("MP", 60, 50);
@@ -122,8 +122,8 @@ public class HUD {
 		double mpPercent;
 		
 		// Mana points based on number of squares visible.
-		if (den.getMaxMP() > 0) {
-			mpPercent = den.getMPRate();
+		if (_den.getMaxMP() > 0) {
+			mpPercent = _den.getMPRate();
 		} else {
 			mpPercent = 0;
 		}
@@ -158,19 +158,19 @@ public class HUD {
 	
 	private void drawMoney(Graphics g) {
 		// Change stats
-		g.setColor(color);
+		g.setColor(_color);
 		
 	}
 	
 	private void drawOrb(Graphics g) {
 		// Change stats
-		//g.setColor(color);
-		g.setFont(fnt);
+		//g.setColor(_color);
+		g.setFont(_fnt);
 		
 		// Draw the orb value square
 		g.drawRect(20, 20, 30, 25);
 		//g2d.drawImage("", dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, observer);
-		g.drawString(String.format("%02d", den.getOrb()), 25, 40);
+		g.drawString(String.format("%02d", _den.getOrb()), 25, 40);
 	}
 	
 	private void drawEquip(Graphics g) {
@@ -178,7 +178,7 @@ public class HUD {
 		Graphics2D g2 = (Graphics2D) g;
 		
 		// Change settings
-		g2.setColor(color);
+		g2.setColor(_color);
 		
 		// Make a set distance
 		int startDist = 100;
@@ -193,7 +193,7 @@ public class HUD {
 		g2.drawRect(DenConstants.WIDTH - startDist, 20, 50, 40);
 		
 		// Draw current equipment
-		//g2.drawImage(image, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+		//g2.drawImage(_image, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
 		
 		// Set back to default
 		g2.setStroke(new BasicStroke(1));
