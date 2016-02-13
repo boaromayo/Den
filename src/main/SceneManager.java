@@ -1,4 +1,4 @@
-package den;
+package main;
 
 import scene.*;
 
@@ -6,38 +6,38 @@ import java.awt.*;
 
 public class SceneManager {
 	/** CURRENT IN-GAME SCENE. **/
-	private static Scene currentScene;
+	private static Scene _currentScene;
 	
 	/** STACK FOR IN-GAME SCENES/STATES. **/
-	private static Scene[] scenes;
+	private static Scene[] _scenes;
 	
 	/** CONSTANT SIZE FOR STACK. **/
 	private static final int SIZE = 5;
 	
 	/** SCENE STACK POSITION. **/
-	private static int position; // Position for stack.
+	private static int _position; // Position for stack.
 	
 	public static void init() {
-		currentScene = new SceneTitle();
-		scenes = new Scene[SIZE];
-		position = -1;
-		changeScene(currentScene);
+		_currentScene = new SceneTitle();
+		_scenes = new Scene[SIZE];
+		_position = -1;
+		changeScene(_currentScene);
 	}
 	
 	public static void update() {
-		if (currentScene != null) {
-			currentScene.update();
+		if (_currentScene != null) {
+			_currentScene.update();
 		}
 	}
 	
 	public static void draw(Graphics g) {
-		if (currentScene != null) {
-			currentScene.draw(g);
+		if (_currentScene != null) {
+			_currentScene.draw(g);
 		}
 	}
 	
 	public static void changeScene(Scene newScene) {
-		currentScene = newScene;
+		_currentScene = newScene;
 	}
 	
 	public static void callScene(Scene newScene) {
@@ -48,38 +48,38 @@ public class SceneManager {
 	private static void saveScene() {
 		// Allocate new array with size of (current position + 1) plus fixed size
 		// if array not big enough for another scene. Set as current scene array.
-		if (position >= scenes.length - 1) {
-			int newsize = (position + 1) + SIZE;
+		if (_position >= _scenes.length - 1) {
+			int newsize = (_position + 1) + SIZE;
 			Scene [] scenescpy = new Scene[newsize];
-			System.arraycopy(scenes, 0, scenescpy, 0, scenes.length);
-			scenes = scenescpy;
+			System.arraycopy(_scenes, 0, scenescpy, 0, _scenes.length);
+			_scenes = scenescpy;
 		}
 		
-		scenes[++position] = currentScene; // Save scene (memory) to remember it.
+		_scenes[++_position] = _currentScene; // Save scene (memory) to remember it.
 	}
 	
 	public static void removeScene() {
-		scenes[position--] = null; // pop out stored scene
+		_scenes[_position--] = null; // pop out stored scene
 	}
 	
 	public static void clear() { 
 		// Clear out all Scenes in-stack.
-		while (scenes != null) {
+		while (_scenes != null) {
 			removeScene();
 		}
 	}
 	
 	public static Scene getCurrentScene() {
-		if (currentScene == null) { return null; }
-		return currentScene;
+		if (_currentScene == null) { return null; }
+		return _currentScene;
 	}
 	
 	public static Scene getScene(int pos) {
-		if (pos >= scenes.length || 
-				pos < 0 || scenes == null) { return null; }
+		if (pos >= _scenes.length || 
+				pos < 0 || _scenes == null) { return null; }
 		
-		return scenes[pos];
+		return _scenes[pos];
 	}
 	
-	public static int getPosition() { return position; }
+	public static int getPosition() { return _position; }
 }
