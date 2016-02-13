@@ -1,4 +1,4 @@
-package den;
+package main;
 
 import java.awt.event.*;
 
@@ -26,70 +26,70 @@ public class Input {
 	/**==========================
 	/* INPUT KEY METHODS.
 	/*===========================**/
-	public static final int[] keys = { W, A, D, S, B, X, C,
+	public static final int[] _keys = { W, A, D, S, B, X, C,
 										UP, LEFT, RIGHT, DOWN, 
 										SPACE, ENTER, SHIFT, ESC };
-	private static boolean [] keyBefore = new boolean[keys.length]; // keeps previous key pressed
-	private static boolean [] keyNow = new boolean[keys.length]; // checks current key pressed
+	private static boolean [] _keyBefore = new boolean[_keys.length]; // keeps previous key pressed
+	private static boolean [] _keyNow = new boolean[_keys.length]; // checks current key pressed
 	
 	private static int checkKey(int key) {
 		int newKey = 0; // 0 is invalid
-		for (int i = 0; i < keys.length; i++) {
-			if (key == keys[i]) { newKey = i; break; }
+		for (int i = 0; i < _keys.length; i++) {
+			if (key == _keys[i]) { newKey = i; break; }
 		}
 		
 		return newKey;
 	}
 	
 	public static void setKey(int key, boolean set) {
-		/*for (int i = 0; i < keys.length; i++) {
-			if (key == keys[i]) { keyNow[i] = set; }
+		/*for (int i = 0; i < _keys.length; i++) {
+			if (key == _keys[i]) { _keyNow[i] = set; }
 		}*/
 		switch(key) {
 		case W:
-			keyNow[0] = set;
+			_keyNow[0] = set;
 			break;
 		case A:
-			keyNow[1] = set;
+			_keyNow[1] = set;
 			break;
 		case D:
-			keyNow[2] = set;
+			_keyNow[2] = set;
 			break;
 		case S:
-			keyNow[3] = set;
+			_keyNow[3] = set;
 			break;
 		case B:
-			keyNow[4] = set;
+			_keyNow[4] = set;
 			break;
 		case X:
-			keyNow[5] = set;
+			_keyNow[5] = set;
 			break;
 		case C:
-			keyNow[6] = set;
+			_keyNow[6] = set;
 			break;
 		case UP:
-			keyNow[7] = set;
+			_keyNow[7] = set;
 			break;
 		case LEFT:
-			keyNow[8] = set;
+			_keyNow[8] = set;
 			break;
 		case RIGHT:
-			keyNow[9] = set;
+			_keyNow[9] = set;
 			break;
 		case DOWN:
-			keyNow[10] = set;
+			_keyNow[10] = set;
 			break;
 		case SPACE:
-			keyNow[11] = set;
+			_keyNow[11] = set;
 			break;
 		case ENTER:
-			keyNow[12] = set;
+			_keyNow[12] = set;
 			break;
 		case SHIFT:
-			keyNow[13] = set;
+			_keyNow[13] = set;
 			break;
 		case ESCAPE:
-			keyNow[14] = set;
+			_keyNow[14] = set;
 			break;
 		default:
 			break;
@@ -97,29 +97,29 @@ public class Input {
 	}
 	
 	public static void update() {
-		for (int i = 0; i < keys.length; i++) {
-			keyBefore[i] = keyNow[i];
+		for (int i = 0; i < _keys.length; i++) {
+			_keyBefore[i] = _keyNow[i];
 		}
 	}
 	
 	public static boolean keyPressed(int i) {
 		i = checkKey(i);
-		return keyNow[i] && !keyBefore[i];
+		return _keyNow[i] && !_keyBefore[i];
 	}
 	
 	public static boolean keyDown(int i) {
 		i = checkKey(i);
-		return keyNow[i];
+		return _keyNow[i];
 	}
 	
 	public static boolean keyRepeated(int i) {
 		i = checkKey(i);
-		return keyNow[i] && keyBefore[i];
+		return _keyNow[i] && _keyBefore[i];
 	}
 	
 	public static boolean keyUp(int i) {
 		i = checkKey(i);
-		return !keyNow[i];
+		return !_keyNow[i];
 	}
 	
 }
