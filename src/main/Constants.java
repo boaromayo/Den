@@ -1,4 +1,4 @@
-package den;
+package main;
 
 import java.awt.*;
 
