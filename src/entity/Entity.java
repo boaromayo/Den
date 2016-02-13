@@ -16,10 +16,10 @@ public abstract class Entity {
 	public enum Direction { UP = 0, LEFT = 1, RIGHT = 2, DOWN = 3; }
 	
 	/** TILEMAP. **/
-	protected TileMap map;
+	protected TileMap _map;
 	
 	/** POSITION AND VELOCITY **/
-	protected PhysicsComp physicsComp;
+	protected PhysicsComp _physicsComp;
 	protected double x, y; 
 	protected double dx, dy;
 	protected int tilex, tiley;
@@ -41,20 +41,17 @@ public abstract class Entity {
 	protected double fallSpeed, maxFallSpeed;
 	protected double jumpSpeed, maxJumpSpeed;
 	
-	// DIRECTION FACING
-	protected boolean facingRight;
-	
 	// ANIMATION OBJECT AND TOGGLE.
-	protected Animation animation;
-	protected boolean animated;
+	protected AnimationComp _animationComp;
+	protected boolean _animated;
 	
 	/**==========================
 	// CONSTRUCTOR(tileMap).
 	//==========================**/
 	public Entity(TileMap m) {
-		map = m;
+		_map = m;
 		
-		physicsComp = new PhysicsComp();
+		_physicsComp = new PhysicsComp();
 		
 		jumpSpeed = 2;
 		maxJumpSpeed = 5;
@@ -65,10 +62,10 @@ public abstract class Entity {
 		jumping = false;
 		falling = true;
 		
-		animation = new Animation();
-		animated = false;
+		_animationComp = new AnimationComp();
+		_animated = false;
 		
-		direction = RIGHT;
+		direction = Direction.RIGHT;
 	}
 	
 	public void checkMapCollision() {
@@ -119,7 +116,7 @@ public abstract class Entity {
 	
 	public void setAnimation(int anim) { /* Let subclasses deal w/ this. */ }
 	
-	public void setAnimated(boolean anim) { animated = anim; }
+	public void setAnimated(boolean anim) { _animated = anim; }
 	
 	public void setdx(double dx) { this.dx = dx; }
 	
@@ -195,7 +192,7 @@ public abstract class Entity {
 		return r1.contains(r2);
 	}
 	
-	public boolean isAnimated() { return animated; }
+	public boolean isAnimated() { return _animated; }
 	
 	/**=============================
 	/* ENTITY ABSTRACT METHODS.
