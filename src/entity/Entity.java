@@ -34,7 +34,7 @@ public abstract class Entity {
 	protected boolean up, down, left, right;
 	
 	/** ACTIONS **/
-	protected boolean moving, jumping, falling, flashing;
+	protected boolean moving, flashing;
 	
 	/** SPEED **/
 	protected boolean walkSpeed, runSpeed; // Aka min & max move speed
@@ -43,7 +43,7 @@ public abstract class Entity {
 	
 	// ANIMATION OBJECT AND TOGGLE.
 	protected AnimationComp _animationComp;
-	protected boolean _animated;
+	//protected boolean _animated;
 	
 	/**==========================
 	// CONSTRUCTOR(tileMap).
@@ -52,6 +52,7 @@ public abstract class Entity {
 		_map = m;
 		
 		_physicsComp = new PhysicsComp();
+		_animationComp = new AnimationComp();
 		
 		jumpSpeed = 2;
 		maxJumpSpeed = 5;
@@ -61,28 +62,27 @@ public abstract class Entity {
 		
 		jumping = false;
 		falling = true;
-		
-		_animationComp = new AnimationComp();
-		_animated = false;
+
+		//_animated = false;
 		
 		direction = Direction.RIGHT;
 	}
 	
 	public void checkMapCollision() {
-		tilex = (int)(x / map.tileSize());
-		tiley = (int)(y / map.tileSize());
+		tilex = (int)(x / _map.tileSize());
+		tiley = (int)(y / _map.tileSize());
 		
 		checkTiles(tilex, tiley);
 	}
 	
 	public void checkTiles(int tx, int ty) {
 		// Surrounding tiles will be collision check tiles
-		boolean tc = (ty - 1) < 0 ? false : map.isSolid(ty - 1,tx);
-		boolean lc = (tx - 1) < 0 ? false : map.isSolid(ty,tx - 1);
-		boolean rc = (tx + 1) > map.tileSize() ? false : map.isSolid(ty,tx + 1);
-		boolean bc = (ty + 1) > map.tileSize() ? false : map.isSolid(ty + 1,tx);
+		boolean tc = (ty - 1) < 0 ? false : _map.isSolid(ty - 1,tx);
+		boolean lc = (tx - 1) < 0 ? false : _map.isSolid(ty,tx - 1);
+		boolean rc = (tx + 1) > _map.tileSize() ? false : _map.isSolid(ty,tx + 1);
+		boolean bc = (ty + 1) > _map.tileSize() ? false : _map.isSolid(ty + 1,tx);
 		
-		if (tc) { setJumping(false); }
+		if (tc) { _animationComp.setJumping(false); }
 		if (lc) { setLeft(false); }
 		if (rc) { setRight(false); }
 		if (bc) { setFalling(false); }
@@ -99,24 +99,14 @@ public abstract class Entity {
 	
 	public void setDown(boolean d) { down = d; }
 	
-	public void setJumping(boolean j) {
-		if (jumping && !falling) { return; }
-		jumping = j; 
-	}
-	
-	public void setFalling(boolean f) {  
-		if (!jumping && falling) { return; }
-		falling = f; 
-	}
-	
 	public void flash() { 
 		if (flashing) return; 
 		flashing = true; 
 	}
 	
-	public void setAnimation(int anim) { /* Let subclasses deal w/ this. */ }
+	//public void setAnimation(int anim) { /* Let subclasses deal w/ this. */ }
 	
-	public void setAnimated(boolean anim) { _animated = anim; }
+	//public void setAnimated(boolean anim) { _animated = anim; }
 	
 	public void setdx(double dx) { this.dx = dx; }
 	
@@ -139,8 +129,8 @@ public abstract class Entity {
 	 * setTileLocation(x,y)
 	/*=============================**/
 	public void setTileLocation(int x, int y) {
-		int lx = x * map.tileSize();
-		int ly = y * map.tileSize();
+		int lx = x * _map.tileSize();
+		int ly = y * _map.tileSize();
 		setLocation(lx,ly);
 	}
 	
@@ -155,6 +145,8 @@ public abstract class Entity {
 	/**========================
 	/* GET METHODS.
 	/*======================**/
+	public AnimationComp animationComp() { return _animationComp; }
+	
 	public double getx() { return x; }
 	
 	public double gety() { return y; }
@@ -166,10 +158,6 @@ public abstract class Entity {
 	public int getWidth() { return width; }
 	
 	public int getHeight() { return height; }
-	
-	public boolean isJumping() { return jumping; }
-	
-	public boolean isFalling() { return falling; }
 	
 	public boolean isFlashing() { return flashing; }
 	
