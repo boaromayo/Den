@@ -5,7 +5,7 @@ import java.awt.image.*;
 
 import java.util.*;
 
-import den.DenConstants;
+import main.Constants;
 
 public class AnimationComp {
 	/** ANIMATION VARIABLES **/
@@ -23,7 +23,7 @@ public class AnimationComp {
 		countToFrame = 0;
 		currFrame = 0;
 		
-		delay = DenConstants.ANIMDELAY;
+		delay = Constants.ANIMDELAY;
 	}
 	
 	/**=========================
@@ -36,7 +36,7 @@ public class AnimationComp {
 		currFrame = 0;
 		maxFrames = frames.length;
 		
-		delay = DenConstants.ANIMDELAY;
+		delay = Constants.ANIMDELAY;
 		
 	}
 	
