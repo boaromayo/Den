@@ -69,9 +69,15 @@ public class AnimationComp {
 	
 	public void setDelay(int d) { delay = d; }
 	
-	public void setJumping(boolean jump) { jumping = jump; }
+	public void setJumping(boolean jump) { 
+		if (jumping && !falling) { return; }
+		jumping = jump;
+	}
 	
-	public void setFalling(boolean fall) { falling = fall; } 
+	public void setFalling(boolean fall) { 
+		if (falling && !jumping) { return; }
+		falling = fall;
+	} 
 	/**=====================
 	// GET METHODS.
 	//=======================**/
