@@ -75,7 +75,7 @@ public class AnimationComp {
 	}
 	
 	public void setFalling(boolean fall) { 
-		if (falling && !jumping) { return; }
+		if (!jumping && falling) { return; }
 		falling = fall;
 	} 
 	/**=====================
