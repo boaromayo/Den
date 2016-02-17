@@ -13,6 +13,8 @@ public class AnimationComp {
 	private int currFrame, maxFrames; // Current frame count and max number of frames.
 	private int countToFrame;
 	private int delay;
+	private boolean jumping;
+	private boolean falling;
 	
 	/**=========================
 	// CONSTRUCTOR. 
@@ -35,6 +37,7 @@ public class AnimationComp {
 		maxFrames = frames.length;
 		
 		delay = DenConstants.ANIMDELAY;
+		
 	}
 	
 	public void update() {
@@ -50,6 +53,7 @@ public class AnimationComp {
 		if (currFrame == maxFrames) {
 			currFrame = 0; // Reset current frame if max is reached.
 		}
+		
 	}
 	
 	/**======================
@@ -65,6 +69,9 @@ public class AnimationComp {
 	
 	public void setDelay(int d) { delay = d; }
 	
+	public void setJumping(boolean jump) { jumping = jump; }
+	
+	public void setFalling(boolean fall) { falling = fall; } 
 	/**=====================
 	// GET METHODS.
 	//=======================**/
@@ -77,4 +84,8 @@ public class AnimationComp {
 	public int getCurrentFrame() { return currFrame; }
 	
 	public int getMaxFrames() { return maxFrames; }
+	
+	public boolean isJumping() { return jumping; }
+	
+	public boolean isFalling() { return falling; }
 }
