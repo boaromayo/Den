@@ -7,7 +7,7 @@ import java.io.*;
 
 import javax.imageio.*;
 
-import den.DenPanel;
+import main.DenPanel;
 
 public class ImageLoader {
 	/**=============================================
@@ -16,9 +16,29 @@ public class ImageLoader {
 	private ImageLoader() {}
 	
 	/**=============================================
+	// SINGLETON OBJECT. - Ensure only one object is made.
+	//==============================================**/
+	private static ImageLoader singleton = null;
+	
+	/**=============================================
+	// get() - Ensures access to methods.
+	//==============================================**/
+	public static ImageLoader get() {
+		if (singleton == null) {
+			synchronized (ImageLoader.class) {
+				if (singleton == null) {
+					singleton = new ImageLoader();
+				}
+			}
+		}
+		
+		return null;
+	}
+	
+	/**=============================================
 	/* loadImage(fileName) - Load an image.
 	/**=============================================**/
-	public static Image loadImage(String fileName) {
+	public Image loadImage(String fileName) {
 		try {
 			System.out.println("Image loading...");
 			return Toolkit.getDefaultToolkit().getImage(fileName);
@@ -33,13 +53,13 @@ public class ImageLoader {
 	}
 	
 	/**=============================================
-	/* loadBufferedImage(fileName) - Load a BufferedImage.
+	/* loadBufferedImage(fileName) - Load BufferedImage.
 	/**=============================================**/
-	public static BufferedImage loadBufferedImage(String fileName) {
+	public BufferedImage loadBufferedImage(String fileName) {
 		try {
 			// Try and load buffered image.
-			if (DenPanel.debug) System.out.println("Buffered image loading...");
-			return ImageIO.read(new File(fileName));
+			if (DenPanel._debug) System.out.println("Buffered image loading...");
+			return ImageIO.read(getClass().getResourceAsStream(fileName));
 		} catch (Exception e) {
 			System.err.println("ERROR: Unable to load buffered image " + fileName);
 			System.err.println("REASON: " + e.getMessage());
@@ -52,7 +72,7 @@ public class ImageLoader {
 	/**=============================================
 	/* loadAndCrop(fileName) - Load a BufferedImage and get part of it.
 	/**=============================================**/
-	public static BufferedImage loadAndCrop(String fileName, int x, int y, 
+	public BufferedImage loadAndCrop(String fileName, int x, int y, 
 			int w, int h) {
 		BufferedImage b = null;
 		
@@ -61,9 +81,9 @@ public class ImageLoader {
 			b = loadBufferedImage(fileName);
 			
 			// Crop image.
-			if (DenPanel.debug) System.out.println("Cropping...");
+			if (DenPanel._debug) System.out.println("Cropping...");
 			b = b.getSubimage(x, y, w, h);
-			if (DenPanel.debug) System.out.println("Image cropped successfully.");
+			if (DenPanel._debug) System.out.println("Image cropped successfully.");
 		} catch (Exception e) {
 			System.err.println("ERROR: Unable to load/prepare image " + fileName);
 			System.err.println("REASON: " + e.getMessage());
@@ -78,7 +98,7 @@ public class ImageLoader {
 	/**=============================================
 	/* loadSheet(fileName) - Load a BufferedImage and place each part on a 2-D "sheet".
 	/**=============================================**/
-	public static BufferedImage[][] loadSheet(String fileName, int w, int h) {
+	public BufferedImage[][] loadSheet(String fileName, int w, int h) {
 		BufferedImage[][] b = null;
 		
 		try {
@@ -99,7 +119,7 @@ public class ImageLoader {
 					b[i][j] = loadAndCrop(fileName,i*w,j*h,w,h);
 				}
 			}
-			if (DenPanel.debug) System.out.println("Image successfully cropped.");
+			if (DenPanel._debug) System.out.println("Image successfully cropped.");
 		} catch (Exception e) {
 			System.err.println("ERROR: Unable to load/prepare image " + fileName);
 			System.err.println("REASON: " + e.getMessage());
